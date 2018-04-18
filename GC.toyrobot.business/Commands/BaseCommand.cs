@@ -17,5 +17,6 @@ namespace GC.toyrobot.business.Commands
 		}
 
 		public abstract void Execute();
+		public abstract string Result { get; }
 	}
 }

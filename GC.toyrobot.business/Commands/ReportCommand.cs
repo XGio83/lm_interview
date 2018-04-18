@@ -8,10 +8,12 @@ namespace GC.toyrobot.business.Commands
 {
 	class ReportCommand : BaseCommand<Robot>
 	{
+		string _result = string.Empty;
 		public ReportCommand(Robot robot) : base(robot) { }
+		public override string Result => _result;
 		public override void Execute()
 		{
-			throw new NotImplementedException();
+			this._result = _receiver.ReportPosition();
 		}
 	}
 }

@@ -33,19 +33,29 @@ namespace GC.toyrobot.business
 				_robotCommandsQueue.Enqueue(command);
 		}
 
-		public void ExecuteCommand(string commandText)
+		public string ExecuteCommand(string commandText)
 		{
 			//esegui subito il command
 			var factory = new RobotCommandFactory(_robot);
 			var command = factory.ParseCommand(commandText);
-			if(command != null) command.Execute();
+			if (command != null)
+			{
+				command.Execute();
+				return command.Result;
+			}
+			return string.Empty;
 		}
 
 		public void ExecuteQueue()
 		{
 			while (_robotCommandsQueue.Count > 0)
 			{
-				_robotCommandsQueue.Dequeue().Execute();
+				var command = _robotCommandsQueue.Dequeue();
+				if (command != null)
+				{
+					command.Execute();
+					return command.Result;
+				}
 			}
 		}
 	}

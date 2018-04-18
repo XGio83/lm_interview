@@ -3,3 +3,4 @@
 - dependency injection
 - controlla in antologia il fatto che il command debba avere contenuta l'istanza del robot
 - gestione eccezione e controllo dei parametri
+- result nel command?? manca la collection dei result ottenuti nel puppeteer. se il result del command è vuoto nn fare un cazzo
