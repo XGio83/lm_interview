@@ -9,45 +9,44 @@ using GC.toyrobot.business.Commands;
 
 namespace GC.toyrobot.business
 {
-	class Puppeteer //invoker facade
+	public class Puppeteer //invoker facade
 	{
-		List<BaseCommand<Robot>> _robotCommands;
+		Queue<BaseCommand<Robot>> _robotCommandsQueue;
 		Robot _robot;
 		Tabletop _table;
 		public Puppeteer(Size tabletopSize, byte robotSpeed)
 		{
 			_table = new Tabletop(tabletopSize);
 			_robot = new Robot(_table, robotSpeed);
-			_robotCommands = new List<BaseCommand<Robot>>();
+			_robotCommandsQueue = new Queue<BaseCommand<Robot>>();
 		}
-		public Puppeteer(Size tabletopSize, byte robotSpeed, List<BaseCommand<Robot>> commands): this(tabletopSize,robotSpeed)
+		internal Puppeteer(Size tabletopSize, byte robotSpeed, List<BaseCommand<Robot>> commands): this(tabletopSize,robotSpeed)
 		{
-			_robotCommands.AddRange(commands);
+			_robotCommandsQueue = new Queue<BaseCommand<Robot>>(commands);
 		}
 
-		//add command?
-		//command factory?
-		//run commands
-		//parsing dei comandi per aggiungerli nella lista
-		//command buffer eseguito al momento del report? perchè in caso di console application e interazione diretta dell'utente probabilmente vorranno che il command sia eseguito subito
-		//pensa a una valenza doppia del puppeteer, con ExecuteCommand(esegue subito) e AddCommand ed ExecuteCommands
-
-		public void AddCommand(string commandText)
+		public void EnqueueCommand(string commandText)
 		{
 			var factory = new RobotCommandFactory(_robot);
-			_robotCommands.Add(factory.ParseCommand(commandText));
+			var command = factory.ParseCommand(commandText);
+			if(command != null)
+				_robotCommandsQueue.Enqueue(command);
 		}
 
-		public void ExeecuteCommand(BaseCommand<Robot> command)
+		public void ExecuteCommand(string commandText)
 		{
 			//esegui subito il command
-
+			var factory = new RobotCommandFactory(_robot);
+			var command = factory.ParseCommand(commandText);
+			if(command != null) command.Execute();
 		}
-		public void MoveRobot()
+
+		public void ExecuteQueue()
 		{
-			_robotCommands.ForEach(c => c.Execute());
+			while (_robotCommandsQueue.Count > 0)
+			{
+				_robotCommandsQueue.Dequeue().Execute();
+			}
 		}
-
-
 	}
 }

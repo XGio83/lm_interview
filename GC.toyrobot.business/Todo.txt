@@ -1,0 +1,5 @@
+﻿- la factory command non statica non mi fa impazzire per nulla
+- guarda se si può fare a meno di system.drawings
+- dependency injection
+- controlla in antologia il fatto che il command debba avere contenuta l'istanza del robot
+- gestione eccezione e controllo dei parametri

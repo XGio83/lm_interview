@@ -58,7 +58,6 @@ namespace GC.toyrobot.Tests
 		[TestMethod]
 		public void Commands_factory_commandParsing()
 		{
-			var possibleCommands = File.ReadAllLines("TestData/Data1.txt");
 			var factory = new RobotCommandFactory(_robot);
 			var commandList = new List<BaseCommand<Robot>>();
 			foreach (var command in getStringCommands())
@@ -75,6 +74,18 @@ namespace GC.toyrobot.Tests
 			Assert.IsInstanceOfType(commandList[6], typeof(LeftCommand));
 			Assert.IsInstanceOfType(commandList[7], typeof(MoveCommand));
 			Assert.IsInstanceOfType(commandList[8], typeof(ReportCommand));
+		}
+
+		[TestMethod]
+		public void Commands_puppeteer_enqueue()
+		{			
+			var puppeteer = new Puppeteer(new System.Drawing.Size(5, 5), 1);
+			foreach (var commandText in getStringCommands())
+			{
+				puppeteer.EnqueueCommand(commandText);
+			}
+			puppeteer.ExecuteQueue();
+			Assert.AreEqual("3,3,NORTH", reportedPosition);
 		}
 
 
