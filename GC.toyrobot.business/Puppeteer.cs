@@ -27,12 +27,14 @@ namespace GC.toyrobot.business
 			_robotCommandsQueue = new Queue<BaseCommand<Robot>>(commands);
 		}
 
-		public void EnqueueCommand(string commandText)
-		{
+		public void EnqueueCommands(List<string> commandsText)
+		{			
 			var factory = new RobotCommandFactory(_robot);
-			var command = factory.ParseCommand(commandText);
-			if(command != null)
-				_robotCommandsQueue.Enqueue(command);
+			commandsText.ForEach(c=> {
+				var command = factory.ParseCommand(c);
+				if (command != null)
+					_robotCommandsQueue.Enqueue(command);
+			});			
 		}
 
 		public string ExecuteCommand(string commandText)
