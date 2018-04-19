@@ -14,13 +14,15 @@ namespace GC.toyrobot.business
 		Queue<BaseCommand<Robot>> _robotCommandsQueue;
 		Robot _robot;
 		Tabletop _table;
-		public Puppeteer(Size tabletopSize, byte robotSpeed)
+		Action<string> _reportCallback;
+		public Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback)
 		{
 			_table = new Tabletop(tabletopSize);
 			_robot = new Robot(_table, robotSpeed);
 			_robotCommandsQueue = new Queue<BaseCommand<Robot>>();
+			_reportCallback = reportCallback;
 		}
-		internal Puppeteer(Size tabletopSize, byte robotSpeed, List<BaseCommand<Robot>> commands): this(tabletopSize,robotSpeed)
+		internal Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback, List<BaseCommand<Robot>> commands): this(tabletopSize,robotSpeed,reportCallback)
 		{
 			_robotCommandsQueue = new Queue<BaseCommand<Robot>>(commands);
 		}
@@ -45,17 +47,14 @@ namespace GC.toyrobot.business
 			}
 			return string.Empty;
 		}
-
+		
 		public void ExecuteQueue()
 		{
 			while (_robotCommandsQueue.Count > 0)
 			{
 				var command = _robotCommandsQueue.Dequeue();
-				if (command != null)
-				{
-					command.Execute();
-					return command.Result;
-				}
+				command.Execute();
+				if (!string.IsNullOrWhiteSpace(command.Result) && _reportCallback != null) _reportCallback.Invoke(command.Result);
 			}
 		}
 	}

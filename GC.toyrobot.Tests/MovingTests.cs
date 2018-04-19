@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GC.toyrobot.business;
 using GC.toyrobot.business.Commands;
+using System.Diagnostics;
 
 namespace GC.toyrobot.Tests
 {
@@ -78,14 +79,17 @@ namespace GC.toyrobot.Tests
 
 		[TestMethod]
 		public void Commands_puppeteer_enqueue()
-		{			
-			var puppeteer = new Puppeteer(new System.Drawing.Size(5, 5), 1);
+		{
+			Action<string> reportCallback = (string rep) => {
+				Debug.WriteLine(rep);
+				Assert.AreEqual("3,3,NORTH", rep);
+			};
+			var puppeteer = new Puppeteer(new System.Drawing.Size(5, 5), 1, reportCallback);
 			foreach (var commandText in getStringCommands())
 			{
 				puppeteer.EnqueueCommand(commandText);
 			}
 			puppeteer.ExecuteQueue();
-			Assert.AreEqual("3,3,NORTH", reportedPosition);
 		}
 
 
