@@ -85,10 +85,7 @@ namespace GC.toyrobot.Tests
 				Assert.AreEqual("3,3,NORTH", rep);
 			};
 			var puppeteer = new Puppeteer(new System.Drawing.Size(5, 5), 1, reportCallback);
-			foreach (var commandText in getStringCommands())
-			{
-				puppeteer.EnqueueCommand(commandText);
-			}
+			puppeteer.EnqueueCommands(getStringCommands().ToList());			
 			puppeteer.ExecuteQueue();
 		}
 
