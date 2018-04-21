@@ -19,7 +19,6 @@ namespace GC.toyrobot.business.Commands
 			_placePoint = placePoint;
 			_direction = direction;
 		}
-		public override string Result => string.Empty;
 		public override void Execute()
 		{
 			_receiver.Place(_placePoint, _direction);

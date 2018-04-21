@@ -9,6 +9,5 @@ namespace GC.toyrobot.business.Commands
 	interface ICommand
 	{
 		void Execute();
-		string Result { get; }
 	}
 }

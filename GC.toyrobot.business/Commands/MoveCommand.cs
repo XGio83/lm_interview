@@ -9,8 +9,6 @@ namespace GC.toyrobot.business.Commands
 	class MoveCommand : BaseCommand<Robot>
 	{
 		public MoveCommand(Robot robot) : base(robot) { }
-
-		public override string Result => string.Empty;
 		public override void Execute()
 		{
 			_receiver.Move();

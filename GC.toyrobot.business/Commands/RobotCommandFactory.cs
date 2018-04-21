@@ -10,10 +10,16 @@ namespace GC.toyrobot.business.Commands
 	class RobotCommandFactory
 	{
 		private Robot _robot;
+		private Action<string> _reportCallback = null;
 		private RobotCommandFactory() { }
 		public RobotCommandFactory(Robot robot)
 		{
 			_robot = robot;
+		}
+
+		public RobotCommandFactory(Robot robot, Action<string> reportCallback) : this(robot)
+		{
+			_reportCallback = reportCallback;
 		}
 
 		public BaseCommand<Robot> ParseCommand(string commandText)
@@ -32,7 +38,7 @@ namespace GC.toyrobot.business.Commands
 					case "RIGHT":
 						return new RightCommand(_robot);
 					case "REPORT":
-						return new ReportCommand(_robot);
+						return new ReportCommand(_robot, _reportCallback);
 				}
 			}
 

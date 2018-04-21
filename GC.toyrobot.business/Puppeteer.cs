@@ -29,7 +29,7 @@ namespace GC.toyrobot.business
 
 		public void EnqueueCommands(List<string> commandsText)
 		{			
-			var factory = new RobotCommandFactory(_robot);
+			var factory = new RobotCommandFactory(_robot, _reportCallback);
 			commandsText.ForEach(c=> {
 				var command = factory.ParseCommand(c);
 				if (command != null)
@@ -40,12 +40,11 @@ namespace GC.toyrobot.business
 		public string ExecuteCommand(string commandText)
 		{
 			//esegui subito il command
-			var factory = new RobotCommandFactory(_robot);
+			var factory = new RobotCommandFactory(_robot, _reportCallback);
 			var command = factory.ParseCommand(commandText);
 			if (command != null)
 			{
 				command.Execute();
-				return command.Result;
 			}
 			return string.Empty;
 		}
@@ -56,7 +55,6 @@ namespace GC.toyrobot.business
 			{
 				var command = _robotCommandsQueue.Dequeue();
 				command.Execute();
-				if (!string.IsNullOrWhiteSpace(command.Result) && _reportCallback != null) _reportCallback.Invoke(command.Result);
 			}
 		}
 	}

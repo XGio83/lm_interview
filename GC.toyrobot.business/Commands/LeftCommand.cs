@@ -10,8 +10,6 @@ namespace GC.toyrobot.business.Commands
 	{
 		public LeftCommand(Robot robot) : base(robot) { }
 
-		public override string Result => string.Empty;
-
 		public override void Execute()
 		{
 			this._receiver.CounterClockwiseTurn();
