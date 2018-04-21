@@ -11,20 +11,20 @@ namespace GC.toyrobot.business
 {
 	public class Puppeteer //invoker facade
 	{
-		Queue<BaseCommand<Robot>> _robotCommandsQueue;
-		Robot _robot;
-		Tabletop _table;
+		Queue<BaseCommand<IRobot>> _robotCommandsQueue;
+		IRobot _robot;
+		IField _table;
 		Action<string> _reportCallback;
 		public Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback)
 		{
 			_table = new Tabletop(tabletopSize);
 			_robot = new Robot(_table, robotSpeed);
-			_robotCommandsQueue = new Queue<BaseCommand<Robot>>();
+			_robotCommandsQueue = new Queue<BaseCommand<IRobot>>();
 			_reportCallback = reportCallback;
 		}
-		internal Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback, List<BaseCommand<Robot>> commands): this(tabletopSize,robotSpeed,reportCallback)
+		internal Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback, List<BaseCommand<IRobot>> commands): this(tabletopSize,robotSpeed,reportCallback)
 		{
-			_robotCommandsQueue = new Queue<BaseCommand<Robot>>(commands);
+			_robotCommandsQueue = new Queue<BaseCommand<IRobot>>(commands);
 		}
 
 		public void EnqueueCommands(List<string> commandsText)

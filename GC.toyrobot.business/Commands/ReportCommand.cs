@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace GC.toyrobot.business.Commands
 {
-	class ReportCommand : BaseCommand<Robot>
+	class ReportCommand : BaseCommand<IRobot>
 	{
 		Action<string> _callBack = null;
-		public ReportCommand(Robot robot, Action<string> reportCallback) : base(robot) {
+		public ReportCommand(IRobot robot, Action<string> reportCallback) : base(robot) {
 			_callBack = reportCallback;
 		}
 		public override void Execute()

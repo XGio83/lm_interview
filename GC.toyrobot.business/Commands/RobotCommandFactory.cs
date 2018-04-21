@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace GC.toyrobot.business.Commands
 {
-	interface ICommandFactory<T>
+	interface IBaseCommandFactory<T>
 	{
 		BaseCommand<T> GetCommand(T receiver, string commandText, Action<string> reportCallback);
 	}
 
-	class RobotCommandFactory : ICommandFactory<Robot>
+	class RobotCommandFactory : IBaseCommandFactory<IRobot>
 	{
 		private static RobotCommandFactory _instance = new RobotCommandFactory();
 		private RobotCommandFactory() { }
@@ -24,7 +24,7 @@ namespace GC.toyrobot.business.Commands
 			}
 		}
 
-		public BaseCommand<Robot> GetCommand(Robot receiver, string commandText, Action<string> reportCallback)
+		public BaseCommand<IRobot> GetCommand(IRobot receiver, string commandText, Action<string> reportCallback)
 		{
 			var placeMatch = Regex.Match(commandText, @"^PLACE (\d+),(\d+),(NORTH|EAST|SOUTH|WEST)$");
 			if (placeMatch.Success)

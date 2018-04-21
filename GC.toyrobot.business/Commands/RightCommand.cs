@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GC.toyrobot.business.Commands
 {
-	class RightCommand : BaseCommand<Robot>
+	class RightCommand : BaseCommand<IRobot>
 	{
-		public RightCommand(Robot robot) : base(robot) { }
+		public RightCommand(IRobot robot) : base(robot) { }
 		public override void Execute()
 		{
 			_receiver.ClockwiseTurn();

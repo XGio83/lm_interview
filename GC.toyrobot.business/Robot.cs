@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace GC.toyrobot.business
 {
-	class Robot
+	class Robot: IRobot
 	{
 		//offset moves
 		private Dictionary<Directions, Point> _movingOffsets;
@@ -15,8 +15,8 @@ namespace GC.toyrobot.business
 		private Point _currentPosition;
 		private Directions _currentDirection;
 		private Status _currentStatus;
-		private Tabletop _table;
-		public Robot(Tabletop table, byte robotSpeed = 1) //inietta il tabletop
+		private IField _table;
+		public Robot(IField table, byte robotSpeed = 1) //inietta il tabletop
 		{
 			//check con il tabletop se la posizione è all'interno dello stesso
 			this._currentPosition = new Point(0, 0);

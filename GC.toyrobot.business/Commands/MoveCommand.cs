@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GC.toyrobot.business.Commands
 {
-	class MoveCommand : BaseCommand<Robot>
+	class MoveCommand : BaseCommand<IRobot>
 	{
-		public MoveCommand(Robot robot) : base(robot) { }
+		public MoveCommand(IRobot robot) : base(robot) { }
 		public override void Execute()
 		{
 			_receiver.Move();
