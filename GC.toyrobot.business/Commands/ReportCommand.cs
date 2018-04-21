@@ -15,7 +15,7 @@ namespace GC.toyrobot.business.Commands
 		public override void Execute()
 		{
 			var position = _receiver.ReportPosition();
-			if (_callBack != null) _callBack.Invoke(position);
+			if (!string.IsNullOrWhiteSpace(position) && _callBack != null) _callBack.Invoke(position);
 		}
 	}
 }

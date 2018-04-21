@@ -1,7 +1,9 @@
 ﻿- la factory command non statica non mi fa impazzire per nulla
 - guarda se si può fare a meno di system.drawings
-- dependency injection
 - controlla in antologia il fatto che il command debba avere contenuta l'istanza del robot
 - gestione eccezione e controllo dei parametri
-- result nel command?? manca la collection dei result ottenuti nel puppeteer. se il result del command è vuoto nn fare un cazzo
 - pensa di dividere in 2 il puppeteer, uno per l'esecuzione immediata ed uno per l'esecuzione in coda con in ingresso la callback.. tipo BatchPuppeteer
+- inversion of control, dependency injection
+- uml delle classi
+- è solid?
+- trasforma il report command in un query command

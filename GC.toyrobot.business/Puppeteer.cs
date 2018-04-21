@@ -28,20 +28,18 @@ namespace GC.toyrobot.business
 		}
 
 		public void EnqueueCommands(List<string> commandsText)
-		{			
-			var factory = new RobotCommandFactory(_robot, _reportCallback);
-			commandsText.ForEach(c=> {
-				var command = factory.ParseCommand(c);
+		{
+			commandsText.ForEach(c => {
+				var command = RobotCommandFactory.Creator.GetCommand(_robot, c, _reportCallback);
 				if (command != null)
 					_robotCommandsQueue.Enqueue(command);
-			});			
+			});
 		}
 
 		public string ExecuteCommand(string commandText)
 		{
 			//esegui subito il command
-			var factory = new RobotCommandFactory(_robot, _reportCallback);
-			var command = factory.ParseCommand(commandText);
+			var command = RobotCommandFactory.Creator.GetCommand(_robot, commandText, _reportCallback);
 			if (command != null)
 			{
 				command.Execute();

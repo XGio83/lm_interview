@@ -59,11 +59,11 @@ namespace GC.toyrobot.Tests
 		[TestMethod]
 		public void Commands_factory_commandParsing()
 		{
-			var factory = new RobotCommandFactory(_robot);
 			var commandList = new List<BaseCommand<Robot>>();
 			foreach (var command in getStringCommands())
 			{
-				commandList.Add(factory.ParseCommand(command));
+				//FAI LA IROBOT. COSI DOPO PUOI CREARE QUI UN BUDDYROBOT A FINI DI TEST
+				commandList.Add(RobotCommandFactory.Creator.GetCommand(new Robot(new Tabletop(new System.Drawing.Size(0,0))),command, null));
 			}
 			Assert.IsTrue(commandList.Count == 9);
 			Assert.IsInstanceOfType(commandList[0], typeof(MoveCommand));
