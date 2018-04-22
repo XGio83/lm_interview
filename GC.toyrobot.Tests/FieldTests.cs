@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
 
-namespace GC.toyrobot.Tests
+namespace GC.ToyRobot.Tests
 {
 	[TestClass]
 	public class FieldTests
@@ -11,7 +10,7 @@ namespace GC.toyrobot.Tests
 		[Description("Test di controllo field")]
 		public void Field_CheckValidPosition()
 		{
-			var table = new business.Tabletop(new Size(5, 5));
+			var table = new Tabletop(new Size(5, 5));
 
 			//check all positions and extra boundaries
 			for (int i = 0; i < table.TableSize.Width; i++)

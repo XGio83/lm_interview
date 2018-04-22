@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GC.toyrobot.Tests.Mocks
+namespace GC.ToyRobot.Tests.Mocks
 {
-	class DummyField : business.IField
+	class DummyField : IField
 	{
 		public bool IsValidPosition(Point destinationPoint)
 		{

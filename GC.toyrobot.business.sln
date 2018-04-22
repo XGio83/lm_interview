@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC.toyrobot.business", "GC.toyrobot.business\GC.toyrobot.business.csproj", "{E2E26EC6-8F8E-4F92-9F05-A7228F0168CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC.Toyrobot", "GC.toyrobot.business\GC.Toyrobot.csproj", "{E2E26EC6-8F8E-4F92-9F05-A7228F0168CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC.toyrobot.Tests", "GC.toyrobot.Tests\GC.toyrobot.Tests.csproj", "{2BFB0219-181D-4E8F-8A0F-233180A6FFE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC.Toyrobot.Tests", "GC.toyrobot.Tests\GC.Toyrobot.Tests.csproj", "{2BFB0219-181D-4E8F-8A0F-233180A6FFE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobotConsole", "ToyRobotConsole\ToyRobotConsole.csproj", "{0301CDA2-1BC4-4180-96FD-13C191EF87D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC.ToyRobot.Console", "ToyRobotConsole\GC.ToyRobot.Console.csproj", "{0301CDA2-1BC4-4180-96FD-13C191EF87D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

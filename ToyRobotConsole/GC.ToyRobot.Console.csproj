@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0301CDA2-1BC4-4180-96FD-13C191EF87D7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ToyRobotConsole</RootNamespace>
+    <RootNamespace>GC.ToyRobot.Console</RootNamespace>
     <AssemblyName>ToyRobot</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -83,9 +83,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GC.toyrobot.business\GC.toyrobot.business.csproj">
+    <ProjectReference Include="..\GC.toyrobot.business\GC.Toyrobot.csproj">
       <Project>{e2e26ec6-8f8e-4f92-9f05-a7228f0168cf}</Project>
-      <Name>GC.toyrobot.business</Name>
+      <Name>GC.Toyrobot</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

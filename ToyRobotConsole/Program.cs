@@ -5,10 +5,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ToyRobotConsole
+namespace GC.ToyRobot.Console
 {
 	class Program
 	{
@@ -16,7 +14,7 @@ namespace ToyRobotConsole
 		private static CommandLineOptions _opts = new CommandLineOptions();
 
 		static void Main(string[] args)
-		{			
+		{
 			CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(() => _opts, args).WithNotParsed(HandleParseError);
 			registerTypes();
 			Run();
@@ -24,40 +22,47 @@ namespace ToyRobotConsole
 
 		private static void HandleParseError(IEnumerable<Error> errs)
 		{
-			Console.ReadLine();
+			System.Console.ReadLine();
 			Environment.Exit(0);
 		}
 
 		private static void Run()
 		{
-			var puppeteer = new GC.toyrobot.business.Puppeteer(_diContainer.Resolve<GC.toyrobot.business.IRobot>(), (r) => { Console.WriteLine(r); });
+			var puppeteer = new Puppeteer(_diContainer.Resolve<IRobot>(), (r) => { System.Console.WriteLine(r); });
 			if (!string.IsNullOrWhiteSpace(_opts.File))
 			{
 				//versione batch
-				var commands = File.ReadAllLines(_opts.File);
-				puppeteer.EnqueueCommands(commands.ToList());
-				puppeteer.ExecuteQueue();
+				if (File.Exists(_opts.File))
+				{
+					var commands = File.ReadAllLines(_opts.File);
+					puppeteer.EnqueueCommands(commands.ToList());
+					puppeteer.ExecuteQueue();
+				}
+				else
+				{
+					System.Console.WriteLine("The file provided does not exists");
+				}
 			}
 			else
 			{
-				Console.WriteLine("Getting started with your Toy Robot, please write commands");
+				System.Console.WriteLine("Getting started with your Toy Robot, please write commands:");
 				var command = string.Empty;
 				do
 				{
-					command = Console.ReadLine();
+					command = System.Console.ReadLine();
 					puppeteer.ExecuteCommand(command);
 
 				} while (command != "EXIT");
 			}
 
-			Console.ReadLine();
+			System.Console.ReadLine();
 		}
 
 		private static void registerTypes()
 		{
 			var builder = new ContainerBuilder();
-			builder.RegisterType<GC.toyrobot.business.Robot>().As<GC.toyrobot.business.IRobot>().WithParameter("robotSpeed", _opts.RobotSpeed);
-			builder.RegisterType<GC.toyrobot.business.Tabletop>().As<GC.toyrobot.business.IField>().WithParameter("tableSize", new Size(_opts.TableSize, _opts.TableSize));
+			builder.RegisterType<Robot>().As<IRobot>().WithParameter("robotSpeed", _opts.RobotSpeed);
+			builder.RegisterType<Tabletop>().As<IField>().WithParameter("tableSize", new Size(_opts.TableSize, _opts.TableSize));
 			_diContainer = builder.Build();
 		}
 	}

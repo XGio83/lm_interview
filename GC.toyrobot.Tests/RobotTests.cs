@@ -1,17 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using GC.toyrobot.business;
-using GC.toyrobot.business.Commands;
 using System.Diagnostics;
 using Autofac;
 using System.Drawing;
 
-namespace GC.toyrobot.Tests
+namespace GC.ToyRobot.Tests
 {
 	[TestClass]
 	public class RobotTests
@@ -177,8 +172,8 @@ namespace GC.toyrobot.Tests
 		private static void registerTypes()
 		{
 			var builder = new ContainerBuilder();
-			builder.RegisterType<GC.toyrobot.business.Robot>().As<GC.toyrobot.business.IRobot>().WithParameter("robotSpeed", ROBOTSPEED);
-			builder.RegisterType<GC.toyrobot.business.Tabletop>().As<GC.toyrobot.business.IField>().WithParameter("tableSize", new Size(SQUAREDTABLESIZE, SQUAREDTABLESIZE));
+			builder.RegisterType<Robot>().As<IRobot>().WithParameter("robotSpeed", ROBOTSPEED);
+			builder.RegisterType<Tabletop>().As<IField>().WithParameter("tableSize", new Size(SQUAREDTABLESIZE, SQUAREDTABLESIZE));
 			_diContainer = builder.Build();
 		}
 

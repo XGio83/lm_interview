@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace GC.toyrobot.business.Commands
+namespace GC.ToyRobot.Commands
 {
 	interface IBaseCommandFactory<T> where T : class
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GC.toyrobot.business
+namespace GC.ToyRobot
 {
 	public interface IField
 	{

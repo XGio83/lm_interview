@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Autofac;
-using GC.toyrobot.business;
-using GC.toyrobot.business.Commands;
+using GC.ToyRobot.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GC.toyrobot.Tests
+namespace GC.ToyRobot.Tests
 {
 	[TestClass]
 	public class CommandFactoryTests

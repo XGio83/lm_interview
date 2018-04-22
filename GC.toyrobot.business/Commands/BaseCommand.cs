@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GC.toyrobot.business.Commands
+namespace GC.ToyRobot.Commands
 {
 	abstract class BaseCommand<T> : ICommand where T : class
 	{

@@ -7,8 +7,8 @@
     <ProjectGuid>{2BFB0219-181D-4E8F-8A0F-233180A6FFE6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GC.toyrobot.Tests</RootNamespace>
-    <AssemblyName>GC.toyrobot.Tests</AssemblyName>
+    <RootNamespace>GC.ToyRobot.Tests</RootNamespace>
+    <AssemblyName>GC.ToyRobot.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -65,9 +65,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GC.toyrobot.business\GC.toyrobot.business.csproj">
+    <ProjectReference Include="..\GC.toyrobot.business\GC.Toyrobot.csproj">
       <Project>{e2e26ec6-8f8e-4f92-9f05-a7228f0168cf}</Project>
-      <Name>GC.toyrobot.business</Name>
+      <Name>GC.Toyrobot</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

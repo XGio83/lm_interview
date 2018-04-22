@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
-namespace GC.toyrobot.business
+namespace GC.ToyRobot
 {
 	public class Robot: IRobot
 	{

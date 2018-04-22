@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GC.toyrobot.business;
-using GC.toyrobot.business.Commands;
+using GC.ToyRobot.Commands;
 
-namespace GC.toyrobot.business
+namespace GC.ToyRobot
 {
 	public class Puppeteer //invoker facade
 	{

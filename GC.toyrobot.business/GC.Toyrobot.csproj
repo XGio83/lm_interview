@@ -7,8 +7,8 @@
     <ProjectGuid>{E2E26EC6-8F8E-4F92-9F05-A7228F0168CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GC.toyrobot.business</RootNamespace>
-    <AssemblyName>GC.toyrobot.business</AssemblyName>
+    <RootNamespace>GC.ToyRobot</RootNamespace>
+    <AssemblyName>GC.ToyRobot</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

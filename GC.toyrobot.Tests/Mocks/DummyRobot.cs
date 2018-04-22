@@ -1,12 +1,7 @@
-﻿using GC.toyrobot.business;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GC.toyrobot.Tests.Mocks
+namespace GC.ToyRobot.Tests.Mocks
 {
 	class DummyRobot : IRobot
 	{
