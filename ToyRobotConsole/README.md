@@ -7,16 +7,10 @@ ToyRobot implementation for the interview :)
 The solution contains 3 projects:
 
 ```
-GC.Toyrobot
-GC.ToyRobot.Console
-GC.Toyrobot.Tests
+GC.Toyrobot				| Toy robot library
+GC.ToyRobot.Console	| Console application to interact with toy robot
+GC.Toyrobot.Tests		| Test project
 ```
-
-Project|Description
--------------------
-GC.ToyRobot| toy robot library
-GC.ToyRobot.Console| Console application to interact with toy robot
-GC.Toyrobot.Tests| Test project
 
 ### Console
 
