@@ -1,5 +1,4 @@
 ﻿OK - la factory command non statica non mi fa impazzire per nulla
-- guarda se si può fare a meno di system.drawings
 OK controlla in antologia il fatto che il command debba avere contenuta l'istanza del robot
 OK gestione eccezione e controllo dei parametri
 OK inversion of control

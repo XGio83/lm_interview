@@ -38,7 +38,7 @@ namespace GC.toyrobot.Tests
 		public void Commands_factory_commandParsing()
 		{
 			var commandList = new List<BaseCommand<IRobot>>();
-			foreach (var command in TestData.DataSupport.GetStringCommands())
+			foreach (var command in TestData.DataSupport.GetDataCommands())
 			{
 				commandList.Add(RobotCommandFactory.Creator.GetCommand(_robot, command, null));
 			}

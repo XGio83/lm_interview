@@ -122,7 +122,7 @@ namespace GC.toyrobot.Tests
 		public void Movement_FromFile_NoCommands()
 		{
 			var reportedPosition = string.Empty;
-			foreach (var command in TestData.DataSupport.GetStringCommands())
+			foreach (var command in TestData.DataSupport.GetDataCommands())
 			{
 				var placeMatch = Regex.Match(command, @"^PLACE (\d+),(\d+),(NORTH|EAST|SOUTH|WEST)$");
 				if (placeMatch.Success)
@@ -158,9 +158,21 @@ namespace GC.toyrobot.Tests
 				Assert.AreEqual("3,3,NORTH", rep);
 			};
 			var puppeteer = new Puppeteer(_robot, reportCallback);
-			puppeteer.EnqueueCommands(TestData.DataSupport.GetStringCommands().ToList());			
+			puppeteer.EnqueueCommands(TestData.DataSupport.GetDataCommands().ToList());			
 			puppeteer.ExecuteQueue();
-		}		
+		}
+
+		[TestMethod]
+		public void Commands_puppeteer_enqueue_spiral()
+		{
+			Action<string> reportCallback = (string rep) => {
+				Debug.WriteLine(rep);
+				Assert.AreEqual("2,2,EAST", rep);
+			};
+			var puppeteer = new Puppeteer(_robot, reportCallback);
+			puppeteer.EnqueueCommands(TestData.DataSupport.GetSpiralCommands().ToList());
+			puppeteer.ExecuteQueue();
+		}
 
 		private static void registerTypes()
 		{
