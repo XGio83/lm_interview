@@ -34,7 +34,7 @@ namespace GC.ToyRobot
 
 		public bool Move()
 		{
-			if (_currentStatus == Status.Placed)
+			if (isPlaced())
 			{
 				var nextPosition = new Point(_currentPosition.X, _currentPosition.Y);
 				nextPosition.Offset(_movingOffsets[this._currentDirection]);
@@ -65,22 +65,27 @@ namespace GC.ToyRobot
 	
 		public void ClockwiseTurn()
 		{
-			if (_currentStatus == Status.Placed)
+			if (isPlaced())
 				this._currentDirection = this._currentDirection == Directions.WEST ? Directions.NORTH : ++this._currentDirection;
 		}
 
 		public void CounterClockwiseTurn()
 		{
-			if (_currentStatus == Status.Placed)
+			if (isPlaced())
 				this._currentDirection = this._currentDirection == Directions.NORTH ? Directions.WEST : --this._currentDirection;
 		}
 
 		public string ReportPosition()
 		{
-			if (_currentStatus == Status.Placed)
+			if (isPlaced())
 				return $"{this._currentPosition.X},{this._currentPosition.Y},{this._currentDirection}";
 			return string.Empty;
-		}		
+		}
+
+		private bool isPlaced()
+		{
+			return _currentStatus == Status.Placed;
+		}
 
 	}
 
