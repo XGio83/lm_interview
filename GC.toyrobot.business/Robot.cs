@@ -13,6 +13,10 @@ namespace GC.ToyRobot
 		private Directions _currentDirection;
 		private Status _currentStatus;
 		private IField _table;
+
+		public Directions CurrentDirection => _currentDirection;
+		public Status Status => _currentStatus;
+
 		public Robot(IField table, byte robotSpeed = 1)
 		{
 			this._table = table ?? throw new ArgumentNullException(nameof(table));
@@ -85,11 +89,10 @@ namespace GC.ToyRobot
 		private bool isPlaced()
 		{
 			return _currentStatus == Status.Placed;
-		}
-
+		}		
 	}
 
-	enum Status
+	public enum Status
 	{
 		Placed,
 		AwayFromTable
