@@ -1,9 +1,0 @@
-﻿OK - la factory command non statica non mi fa impazzire per nulla
-OK controlla in antologia il fatto che il command debba avere contenuta l'istanza del robot
-OK gestione eccezione e controllo dei parametri
-OK inversion of control
-OK dependency injection
-- uml delle classi
-- è solid?
-- trasforma il report command in un query command
-- test test test

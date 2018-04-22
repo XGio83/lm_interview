@@ -28,32 +28,39 @@ namespace GC.ToyRobot.Console
 
 		private static void Run()
 		{
-			var puppeteer = new Puppeteer(_diContainer.Resolve<IRobot>(), (r) => { System.Console.WriteLine(r); });
-			if (!string.IsNullOrWhiteSpace(_opts.File))
+			try
 			{
-				//versione batch
-				if (File.Exists(_opts.File))
+				var puppeteer = new Puppeteer(_diContainer.Resolve<IRobot>(), (r) => { System.Console.WriteLine(r); });
+				if (!string.IsNullOrWhiteSpace(_opts.File))
 				{
-					var commands = File.ReadAllLines(_opts.File);
-					puppeteer.EnqueueCommands(commands.ToList());
-					puppeteer.ExecuteQueue();
+					//versione batch
+					if (File.Exists(_opts.File))
+					{
+						var commands = File.ReadAllLines(_opts.File);
+						puppeteer.EnqueueCommands(commands.ToList());
+						puppeteer.ExecuteQueue();
+					}
+					else
+					{
+						System.Console.WriteLine("The file provided does not exists");
+					}
 				}
 				else
 				{
-					System.Console.WriteLine("The file provided does not exists");
+					System.Console.WriteLine("Getting started with your Toy Robot, please write commands:");
+					var command = string.Empty;
+					do
+					{
+						command = System.Console.ReadLine();
+						puppeteer.ExecuteCommand(command);
+
+					} while (command != "EXIT");
 				}
 			}
-			else
+			catch (Exception ex)
 			{
-				System.Console.WriteLine("Getting started with your Toy Robot, please write commands:");
-				var command = string.Empty;
-				do
-				{
-					command = System.Console.ReadLine();
-					puppeteer.ExecuteCommand(command);
-
-				} while (command != "EXIT");
-			}
+				System.Console.WriteLine("Ops.. an error has occured");
+			}			
 
 			System.Console.ReadLine();
 		}

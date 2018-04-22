@@ -92,7 +92,6 @@ namespace GC.ToyRobot.Tests
 		}
 
 		[TestMethod]
-		[Description("")]
 		public void Robot_SimpleMove_WithIgnore()
 		{
 			/*
