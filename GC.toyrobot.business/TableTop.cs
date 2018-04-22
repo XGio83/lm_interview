@@ -13,7 +13,7 @@ namespace GC.toyrobot.business
 
 		//per il falling check
 		public bool IsValidPosition(Point destinationPoint) {
-			return destinationPoint.X <= this._tableSize.Width && destinationPoint.Y <= this._tableSize.Height;
+			return destinationPoint.X <= this._tableSize.Width && destinationPoint.X >= 0 && destinationPoint.Y <= this._tableSize.Height && destinationPoint.Y >= 0;
 		}
 	}
 }

@@ -14,7 +14,7 @@ using System.Drawing;
 namespace GC.toyrobot.Tests
 {
 	[TestClass]
-	public class MovingTests
+	public class RobotTests
 	{
 		private static IContainer _diContainer;
 		private IRobot _robot;
@@ -25,11 +25,12 @@ namespace GC.toyrobot.Tests
 		[TestInitialize]
 		public void Init()
 		{
+			registerTypes();
 			_robot = _diContainer.Resolve<IRobot>();
 		}
 
 		[TestCleanup]
-		private void cleanup()
+		public void cleanup()
 		{
 			//pulisci il container
 			_diContainer.Dispose();
@@ -117,12 +118,11 @@ namespace GC.toyrobot.Tests
 			Assert.AreEqual(_robot.ReportPosition(), "3,3,NORTH");
 		}
 
-
 		[TestMethod]
 		public void Movement_FromFile_NoCommands()
 		{
 			var reportedPosition = string.Empty;
-			foreach (var command in getStringCommands())
+			foreach (var command in TestData.DataSupport.GetStringCommands())
 			{
 				var placeMatch = Regex.Match(command, @"^PLACE (\d+),(\d+),(NORTH|EAST|SOUTH|WEST)$");
 				if (placeMatch.Success)
@@ -149,28 +149,7 @@ namespace GC.toyrobot.Tests
 
 			Assert.AreEqual("3,3,NORTH", reportedPosition);
 		}
-
-		[TestMethod]
-		public void Commands_factory_commandParsing()
-		{
-			var commandList = new List<BaseCommand<IRobot>>();
-			foreach (var command in getStringCommands())
-			{
-				//FAI LA IROBOT. COSI DOPO PUOI CREARE QUI UN BUDDYROBOT A FINI DI TEST
-				commandList.Add(RobotCommandFactory.Creator.GetCommand(new Mocks.DummyRobot(),command, null));
-			}
-			Assert.IsTrue(commandList.Count == 9);
-			Assert.IsInstanceOfType(commandList[0], typeof(MoveCommand));
-			Assert.IsInstanceOfType(commandList[1], typeof(LeftCommand));
-			Assert.IsInstanceOfType(commandList[2], typeof(PlaceCommand));
-			Assert.IsInstanceOfType(commandList[3], typeof(PlaceCommand));
-			Assert.IsInstanceOfType(commandList[4], typeof(MoveCommand));
-			Assert.IsInstanceOfType(commandList[5], typeof(MoveCommand));
-			Assert.IsInstanceOfType(commandList[6], typeof(LeftCommand));
-			Assert.IsInstanceOfType(commandList[7], typeof(MoveCommand));
-			Assert.IsInstanceOfType(commandList[8], typeof(ReportCommand));
-		}
-
+		
 		[TestMethod]
 		public void Commands_puppeteer_enqueue()
 		{
@@ -179,15 +158,9 @@ namespace GC.toyrobot.Tests
 				Assert.AreEqual("3,3,NORTH", rep);
 			};
 			var puppeteer = new Puppeteer(_robot, reportCallback);
-			puppeteer.EnqueueCommands(getStringCommands().ToList());			
+			puppeteer.EnqueueCommands(TestData.DataSupport.GetStringCommands().ToList());			
 			puppeteer.ExecuteQueue();
-		}
-
-
-		private IEnumerable<string> getStringCommands()
-		{
-			return File.ReadAllLines("TestData/Data1.txt", System.Text.Encoding.UTF8).Select(l => l.Trim());
-		}
+		}		
 
 		private static void registerTypes()
 		{
