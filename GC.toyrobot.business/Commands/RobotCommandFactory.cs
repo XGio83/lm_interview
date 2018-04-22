@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GC.toyrobot.business.Commands
 {
-	interface IBaseCommandFactory<T>
+	interface IBaseCommandFactory<T> where T : class
 	{
 		BaseCommand<T> GetCommand(T receiver, string commandText, Action<string> reportCallback);
 	}
@@ -26,6 +26,8 @@ namespace GC.toyrobot.business.Commands
 
 		public BaseCommand<IRobot> GetCommand(IRobot receiver, string commandText, Action<string> reportCallback)
 		{
+			if (receiver == null) throw new ArgumentNullException(nameof(receiver));
+
 			var placeMatch = Regex.Match(commandText, @"^PLACE (\d+),(\d+),(NORTH|EAST|SOUTH|WEST)$");
 			if (placeMatch.Success)
 				return new PlaceCommand(receiver, byte.Parse(placeMatch.Groups[1].Value), byte.Parse(placeMatch.Groups[2].Value), (Directions)Enum.Parse(typeof(Directions), placeMatch.Groups[3].Value));

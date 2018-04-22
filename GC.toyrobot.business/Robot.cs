@@ -16,13 +16,12 @@ namespace GC.toyrobot.business
 		private Directions _currentDirection;
 		private Status _currentStatus;
 		private IField _table;
-		public Robot(IField table, byte robotSpeed = 1) //inietta il tabletop
+		public Robot(IField table, byte robotSpeed = 1)
 		{
-			//check con il tabletop se la posizione è all'interno dello stesso
+			this._table = table ?? throw new ArgumentNullException(nameof(table));
 			this._currentPosition = new Point(0, 0);
 			this._currentDirection = Directions.NORTH;
-			this._currentStatus = Status.AwayFromTable;
-			this._table = table;
+			this._currentStatus = Status.AwayFromTable;			
 			this.initOffsets(robotSpeed);
 		}
 

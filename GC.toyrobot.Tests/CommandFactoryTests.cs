@@ -52,6 +52,9 @@ namespace GC.toyrobot.Tests
 			Assert.IsInstanceOfType(commandList[6], typeof(LeftCommand));
 			Assert.IsInstanceOfType(commandList[7], typeof(MoveCommand));
 			Assert.IsInstanceOfType(commandList[8], typeof(ReportCommand));
+
+			var fakeCommand = RobotCommandFactory.Creator.GetCommand(_robot, "fakeCommand", null);
+			Assert.IsNull(fakeCommand);
 		}
 
 		private static void registerTypes()
