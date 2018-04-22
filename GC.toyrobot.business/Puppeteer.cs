@@ -17,13 +17,6 @@ namespace GC.ToyRobot
 			_reportCallback = reportCallback;
 		}
 
-		internal Puppeteer(IRobot robot, Action<string> reportCallback, List<BaseCommand<IRobot>> commands) : this(robot, reportCallback)
-		{
-			if (commands == null) throw new ArgumentNullException(nameof(commands));
-
-			_robotCommandsQueue = new Queue<BaseCommand<IRobot>>(commands);
-		}
-
 		public void EnqueueCommands(List<string> commandsText)
 		{
 			commandsText.ForEach(c => {
