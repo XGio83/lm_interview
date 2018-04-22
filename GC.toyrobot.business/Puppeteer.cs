@@ -13,16 +13,28 @@ namespace GC.toyrobot.business
 	{
 		Queue<BaseCommand<IRobot>> _robotCommandsQueue;
 		IRobot _robot;
-		IField _table;
 		Action<string> _reportCallback;
-		public Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback)
+		//public Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback)
+		//{
+		//	_table = new Tabletop(tabletopSize);
+		//	_robot = new Robot(_table, robotSpeed);
+		//	_robotCommandsQueue = new Queue<BaseCommand<IRobot>>();
+		//	_reportCallback = reportCallback;
+		//}
+
+		public Puppeteer(IRobot robot, Action<string> reportCallback)
 		{
-			_table = new Tabletop(tabletopSize);
-			_robot = new Robot(_table, robotSpeed);
+			_robot = robot;
 			_robotCommandsQueue = new Queue<BaseCommand<IRobot>>();
 			_reportCallback = reportCallback;
 		}
-		internal Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback, List<BaseCommand<IRobot>> commands): this(tabletopSize,robotSpeed,reportCallback)
+
+		//internal Puppeteer(Size tabletopSize, byte robotSpeed, Action<string> reportCallback, List<BaseCommand<IRobot>> commands): this(tabletopSize,robotSpeed,reportCallback)
+		//{
+		//	_robotCommandsQueue = new Queue<BaseCommand<IRobot>>(commands);
+		//}
+
+		internal Puppeteer(IRobot robot, Action<string> reportCallback, List<BaseCommand<IRobot>> commands) : this(robot, reportCallback)
 		{
 			_robotCommandsQueue = new Queue<BaseCommand<IRobot>>(commands);
 		}

@@ -2,7 +2,7 @@
 
 namespace GC.toyrobot.business
 {
-	class Tabletop: IField
+	public class Tabletop: IField
 	{
 		private Size _tableSize;
 

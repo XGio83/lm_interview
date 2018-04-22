@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace GC.toyrobot.business
 {
-	class Robot: IRobot
+	public class Robot: IRobot
 	{
 		//offset moves
 		private Dictionary<Directions, Point> _movingOffsets;

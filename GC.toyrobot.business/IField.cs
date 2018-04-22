@@ -2,7 +2,7 @@
 
 namespace GC.toyrobot.business
 {
-	interface IField
+	public interface IField
 	{
 		bool IsValidPosition(Point destinationPoint);
 	}

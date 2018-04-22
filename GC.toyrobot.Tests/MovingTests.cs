@@ -8,21 +8,115 @@ using System.Collections.Generic;
 using GC.toyrobot.business;
 using GC.toyrobot.business.Commands;
 using System.Diagnostics;
+using Autofac;
+using System.Drawing;
 
 namespace GC.toyrobot.Tests
 {
 	[TestClass]
 	public class MovingTests
 	{
-		private Robot _robot;
-		private Tabletop _table;
+		private static IContainer _diContainer;
+		private IRobot _robot;
+		private const int ROBOTSPEED = 1;
+		private const int SQUAREDTABLESIZE = 5;
+		
 
 		[TestInitialize]
 		public void Init()
 		{
-			_table = new Tabletop(new System.Drawing.Size(5, 5));
-			_robot = new Robot(_table);
+			_robot = _diContainer.Resolve<IRobot>();
 		}
+
+		[TestCleanup]
+		private void cleanup()
+		{
+			//pulisci il container
+			_diContainer.Dispose();
+			_diContainer = null;
+			_robot = null;			
+		}
+
+		[TestMethod]
+		public void Robot_ClockwiseDirection()
+		{
+			_robot.Place(0, 0, Directions.NORTH);
+			_robot.ClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.EAST.ToString()));
+			_robot.ClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.SOUTH.ToString()));
+			_robot.ClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.WEST.ToString()));
+			_robot.ClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.NORTH.ToString()));
+			_robot.ClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.EAST.ToString()));
+		}
+
+		[TestMethod]
+		public void Robot_CounterclockwiseDirection()
+		{
+			_robot.Place(0, 0, Directions.NORTH);
+			_robot.CounterClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.WEST.ToString()));
+			_robot.CounterClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.SOUTH.ToString()));
+			_robot.CounterClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.EAST.ToString()));
+			_robot.CounterClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.NORTH.ToString()));
+			_robot.CounterClockwiseTurn();
+			Assert.IsTrue(_robot.ReportPosition().EndsWith(Directions.WEST.ToString()));
+		}
+
+		[TestMethod]
+		public void Robot_SimpleMove()
+		{
+			/*
+				PLACE 0,0,NORTH
+				MOVE
+				REPORT
+			*/
+			_robot.Place(0, 0, Directions.NORTH);
+			_robot.Move();
+			Assert.AreEqual(_robot.ReportPosition(), "0,1,NORTH");
+		}
+
+		[TestMethod]
+		public void Robot_SimpleMove_WithTurn()
+		{
+			/*
+				PLACE 0,0,NORTH
+				LEFT
+				REPORT
+			*/
+			_robot.Place(0, 0, Directions.NORTH);
+			_robot.CounterClockwiseTurn();
+			Assert.AreEqual(_robot.ReportPosition(), "0,0,WEST");
+		}
+
+		[TestMethod]
+		[Description("")]
+		public void Robot_SimpleMove_WithIgnore()
+		{
+			/*
+				PLACE 7,2,EAST
+				PLACE 1,2,EAST
+				MOVE
+				MOVE
+				LEFT
+				MOVE
+				REPORT
+			*/
+			_robot.Place(7, 2, Directions.EAST);
+			_robot.Place(1, 2, Directions.EAST);
+			_robot.Move();
+			_robot.Move();
+			_robot.CounterClockwiseTurn();
+			_robot.Move();
+			Assert.AreEqual(_robot.ReportPosition(), "3,3,NORTH");
+		}
+
 
 		[TestMethod]
 		public void Movement_FromFile_NoCommands()
@@ -59,11 +153,11 @@ namespace GC.toyrobot.Tests
 		[TestMethod]
 		public void Commands_factory_commandParsing()
 		{
-			var commandList = new List<BaseCommand<Robot>>();
+			var commandList = new List<BaseCommand<IRobot>>();
 			foreach (var command in getStringCommands())
 			{
 				//FAI LA IROBOT. COSI DOPO PUOI CREARE QUI UN BUDDYROBOT A FINI DI TEST
-				commandList.Add(RobotCommandFactory.Creator.GetCommand(new Robot(new Tabletop(new System.Drawing.Size(0,0))),command, null));
+				commandList.Add(RobotCommandFactory.Creator.GetCommand(new Mocks.DummyRobot(),command, null));
 			}
 			Assert.IsTrue(commandList.Count == 9);
 			Assert.IsInstanceOfType(commandList[0], typeof(MoveCommand));
@@ -84,7 +178,7 @@ namespace GC.toyrobot.Tests
 				Debug.WriteLine(rep);
 				Assert.AreEqual("3,3,NORTH", rep);
 			};
-			var puppeteer = new Puppeteer(new System.Drawing.Size(5, 5), 1, reportCallback);
+			var puppeteer = new Puppeteer(_robot, reportCallback);
 			puppeteer.EnqueueCommands(getStringCommands().ToList());			
 			puppeteer.ExecuteQueue();
 		}
@@ -94,6 +188,14 @@ namespace GC.toyrobot.Tests
 		{
 			return File.ReadAllLines("TestData/Data1.txt", System.Text.Encoding.UTF8).Select(l => l.Trim());
 		}
-		
+
+		private static void registerTypes()
+		{
+			var builder = new ContainerBuilder();
+			builder.RegisterType<GC.toyrobot.business.Robot>().As<GC.toyrobot.business.IRobot>().WithParameter("robotSpeed", ROBOTSPEED);
+			builder.RegisterType<GC.toyrobot.business.Tabletop>().As<GC.toyrobot.business.IField>().WithParameter("tableSize", new Size(SQUAREDTABLESIZE, SQUAREDTABLESIZE));
+			_diContainer = builder.Build();
+		}
+
 	}
 }

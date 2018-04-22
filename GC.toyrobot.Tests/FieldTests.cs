@@ -5,7 +5,7 @@ using System.Drawing;
 namespace GC.toyrobot.Tests
 {
 	[TestClass]
-	public class UnitTest1
+	public class FieldTests
 	{
 		[TestMethod]
 		[Description("Test di controllo field")]
@@ -16,10 +16,6 @@ namespace GC.toyrobot.Tests
 			Assert.IsTrue(table.IsValidPosition(new Point { X = 1, Y = 1 }));
 			Assert.IsFalse(table.IsValidPosition(new Point { X = 6, Y = 5 }));
 			Assert.IsFalse(table.IsValidPosition(new Point { X = 5, Y = 6 }));
-
-			//var t = new business.Commands.LeftCommand();
-
-
 		}
 		
 	}

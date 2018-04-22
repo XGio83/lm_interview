@@ -2,7 +2,7 @@
 
 namespace GC.toyrobot.business
 {
-	interface IRobot
+	public interface IRobot
 	{
 		bool Place(byte x, byte y, Directions direcion);
 		bool Place(Point position, Directions direction);

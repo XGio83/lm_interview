@@ -3,7 +3,9 @@
 OK - controlla in antologia il fatto che il command debba avere contenuta l'istanza del robot
 - gestione eccezione e controllo dei parametri
 - pensa di dividere in 2 il puppeteer, uno per l'esecuzione immediata ed uno per l'esecuzione in coda con in ingresso la callback.. tipo BatchPuppeteer
-- inversion of control, dependency injection
+OK inversion of control
+- dependency injection
 - uml delle classi
 - è solid?
 - trasforma il report command in un query command
+- test test test, fai i mock per robot
