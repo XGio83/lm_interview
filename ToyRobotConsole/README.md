@@ -17,7 +17,7 @@ GC.Toyrobot.Test........Test project
 You can provide commands to Toy Robot one by one..
 
 ```
-ToyRobox.exe -t 5 -s 1
+ToyRobot.exe -t 5 -s 1
 PLACE 0,0,NORTH
 MOVE
 ...
@@ -26,7 +26,7 @@ MOVE
 or read them from a text file
 
 ```
-ToyRobox.exe -t 5 -s 1 -f "x:\data.txt"
+ToyRobot.exe -t 5 -s 1 -f "x:\data.txt"
 ```
 
 #### Parameters
